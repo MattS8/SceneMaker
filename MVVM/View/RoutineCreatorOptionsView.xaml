@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Scene_Maker.MVVM.View.RoutineCreatorOptionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scene_Maker.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel
+            Margin="0,0,0,16">
+            <Button Content="Add Marker"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonOneshotTheme}"
+                             Command="{Binding CreateSceneCommand}"/>
+            <Button Content="Create Routine"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonOneshotTheme}"
+                             Command="{Binding CreateSceneCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

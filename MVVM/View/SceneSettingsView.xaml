@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Scene_Maker.MVVM.View.SceneSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scene_Maker.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBlock 
+            Foreground="DarkSeaGreen"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="/Fonts/#Poppins"
+            FontWeight="Light"
+            FontSize="18"
+            Text="Scene Settings View"
+            />
+    </Grid>
+</UserControl>

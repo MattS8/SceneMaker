@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "61d42ac8-d5c9-4d65-a6c2-a94febb6d886": {
+      "ProjectGuid": "61d42ac8-d5c9-4d65-a6c2-a94febb6d886",
+      "DisplayName": "Scene Maker",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

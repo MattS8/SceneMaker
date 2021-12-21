@@ -1,0 +1,51 @@
+﻿<Application x:Class="Scene_Maker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:Scene_Maker.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Scene_Maker.MVVM.View"
+             xmlns:local="clr-namespace:Scene_Maker"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/SystemExitButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/SystemMenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/InnerBackButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/MenuButtonOneshotTheme.xaml"/>    
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:AllRoutinesViewModel}">
+                <view:AllRoutinesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SceneSettingsViewModel}">
+                <view:SceneSettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SceneCreationViewModel}">
+                <view:SceneCreationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SceneCreationOptionsViewModel}">
+                <view:SceneCreationOptionsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AllRoutinesOptionsViewModel}">
+                <view:AllRoutinesOptionsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SceneSettingsOptionsViewModel}">
+                <view:SceneSettingsOptionsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RoutineCreatoreViewModel}">
+                <view:RoutineCreatorView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RoutineCreatorOptionsViewModel}">
+                <view:RoutineCreatorOptionsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SimpleNavOptionsViewModel}">
+                <view:SimpleBackNavOptions/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmptyNavOptionsViewModel}">
+                <view:EmptyNavOptionsView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
