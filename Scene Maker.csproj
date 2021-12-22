@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -69,43 +69,43 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\AllRoutinesOptionsView.xaml">
+    <Page Include="MVVM\View\Routines\AllRoutinesOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\AllRoutinesView.xaml">
+    <Page Include="MVVM\View\Routines\AllRoutinesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SceneCreationOptionsView.xaml">
+    <Page Include="MVVM\View\SceneCreation\SceneCreationOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SceneCreationView.xaml">
+    <Page Include="MVVM\View\SceneCreation\SceneCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\EmptyNavOptionsView.xaml">
+    <Page Include="MVVM\View\InnerNav\EmptyNavOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\RoutineCreatorOptionsView.xaml">
+    <Page Include="MVVM\View\Routines\RoutineCreator\RoutineCreatorOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\RoutineCreatorView.xaml">
+    <Page Include="MVVM\View\Routines\RoutineCreator\RoutineCreatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SceneSettingsOptionsView.xaml">
+    <Page Include="MVVM\View\SceneSettings\SceneSettingsOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SceneSettingsView.xaml">
+    <Page Include="MVVM\View\SceneSettings\SceneSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\SimpleBackNavOptions.xaml">
+    <Page Include="MVVM\View\InnerNav\SimpleBackNavOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,43 +137,43 @@
   <ItemGroup>
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SceneCreationOptionsViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SceneCreationViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\EmptyNavOptionsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SceneCreation\SceneCreationOptionsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SceneCreation\SceneCreationViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\InnerNav\EmptyNavOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\RoutineCreatoreViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\RoutineCreatorOptionsViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SceneSettingsOptionsViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SceneSettingsViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\SimpleNavOptionsViewModel.cs" />
-    <Compile Include="MVVM\View\AllRoutinesOptionsView.xaml.cs">
+    <Compile Include="MVVM\ViewModel\Routines\RoutineCreator\RoutineCreatoreViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\Routines\RoutineCreator\RoutineCreatorOptionsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SceneSettings\SceneSettingsOptionsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SceneSettings\SceneSettingsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\InnerNav\SimpleNavOptionsViewModel.cs" />
+    <Compile Include="MVVM\View\Routines\AllRoutinesOptionsView.xaml.cs">
       <DependentUpon>AllRoutinesOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\AllRoutinesView.xaml.cs">
+    <Compile Include="MVVM\View\Routines\AllRoutinesView.xaml.cs">
       <DependentUpon>AllRoutinesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SceneCreationOptionsView.xaml.cs">
+    <Compile Include="MVVM\View\SceneCreation\SceneCreationOptionsView.xaml.cs">
       <DependentUpon>SceneCreationOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SceneCreationView.xaml.cs">
+    <Compile Include="MVVM\View\SceneCreation\SceneCreationView.xaml.cs">
       <DependentUpon>SceneCreationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\EmptyNavOptionsView.xaml.cs">
+    <Compile Include="MVVM\View\InnerNav\EmptyNavOptionsView.xaml.cs">
       <DependentUpon>EmptyNavOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\RoutineCreatorOptionsView.xaml.cs">
+    <Compile Include="MVVM\View\Routines\RoutineCreator\RoutineCreatorOptionsView.xaml.cs">
       <DependentUpon>RoutineCreatorOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\RoutineCreatorView.xaml.cs">
+    <Compile Include="MVVM\View\Routines\RoutineCreator\RoutineCreatorView.xaml.cs">
       <DependentUpon>RoutineCreatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SceneSettingsOptionsView.xaml.cs">
+    <Compile Include="MVVM\View\SceneSettings\SceneSettingsOptionsView.xaml.cs">
       <DependentUpon>SceneSettingsOptionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SceneSettingsView.xaml.cs">
+    <Compile Include="MVVM\View\SceneSettings\SceneSettingsView.xaml.cs">
       <DependentUpon>SceneSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\SimpleBackNavOptions.xaml.cs">
+    <Compile Include="MVVM\View\InnerNav\SimpleBackNavOptions.xaml.cs">
       <DependentUpon>SimpleBackNavOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -208,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="MVVM\Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
