@@ -16,7 +16,9 @@
             Margin="4"
             CornerRadius="6"
             Background="#322953">
-            
+
+            <ContentPresenter Content="{Binding AudioVisualizer}"/>
+
         </Border>
             
     </Grid>

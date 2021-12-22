@@ -52,7 +52,7 @@
                     FontFamily="/Fonts/#Poppins"
                     FontWeight="Light"
                     FontSize="18"
-                    Text="to get started."
+                    Text="to select a .WAV file and get started."
                 />
         </Grid>
         

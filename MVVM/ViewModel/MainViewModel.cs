@@ -1,4 +1,5 @@
-﻿using Scene_Maker.Core;
+﻿using Microsoft.Win32;
+using Scene_Maker.Core;
 
 namespace Scene_Maker.MVVM.ViewModel
 {
@@ -19,7 +20,7 @@ namespace Scene_Maker.MVVM.ViewModel
 
         public AllRoutinesViewModel AllRoutinesVM { get; set; }
         public AllRoutinesOptionsViewModel AllRoutinesOptionsVM { get; set; }
-        public RoutineCreatoreViewModel RoutineCreatoreVM { get; set; }
+        public RoutineCreatorViewModel RoutineCreatoreVM { get; set; }
         public RoutineCreatorOptionsViewModel RoutineCreatorOptionsVM { get; set; }
         #endregion
 
@@ -35,9 +36,9 @@ namespace Scene_Maker.MVVM.ViewModel
         public object CurrentView
         {
             get { return _currentView; }
-            set 
-            { 
-                _currentView = value; 
+            set
+            {
+                _currentView = value;
                 OnPropertyChanged();
             }
         }
@@ -65,7 +66,7 @@ namespace Scene_Maker.MVVM.ViewModel
         public MainViewModel()
         {
             AllRoutinesVM = new AllRoutinesViewModel();
-            RoutineCreatoreVM = new RoutineCreatoreViewModel();
+            RoutineCreatoreVM = new RoutineCreatorViewModel();
             AllRoutinesOptionsVM = new AllRoutinesOptionsViewModel(this);
             RoutineCreatorOptionsVM = new RoutineCreatorOptionsViewModel();
 
@@ -77,7 +78,6 @@ namespace Scene_Maker.MVVM.ViewModel
 
             CurrentView = AllRoutinesVM;
             CurrentViewOptions = AllRoutinesOptionsVM;
-
 
             #region Top View Commands
             AllRoutinesCommand = new RelayCommand(o => 
@@ -105,9 +105,16 @@ namespace Scene_Maker.MVVM.ViewModel
             #region Sub View Commands
             NewRoutineCommand = new RelayCommand(o =>
             {
-                CurrentView = RoutineCreatoreVM;
-                CurrentViewOptions = RoutineCreatorOptionsVM;
-                InnerNavView = BackToRoutinesVM;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "All Supported Files (*.wav;*.mp3)|*.wav;*.mp3|All Files (*.*)|*.*";
+                bool? result = openFileDialog.ShowDialog();
+                if (result.HasValue && result.Value)
+                {
+                    CurrentView = RoutineCreatoreVM;
+                    CurrentViewOptions = RoutineCreatorOptionsVM;
+                    InnerNavView = BackToRoutinesVM;
+                    RoutineCreatoreVM.Load(openFileDialog.FileName);
+                }
             });
             BackToRoutinesCommand = new RelayCommand(o =>
             {

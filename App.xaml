@@ -34,7 +34,7 @@
             <DataTemplate DataType="{x:Type viewModel:SceneSettingsOptionsViewModel}">
                 <view:SceneSettingsOptionsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:RoutineCreatoreViewModel}">
+            <DataTemplate DataType="{x:Type viewModel:RoutineCreatorViewModel}">
                 <view:RoutineCreatorView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RoutineCreatorOptionsViewModel}">
@@ -46,6 +46,7 @@
             <DataTemplate DataType="{x:Type viewModel:EmptyNavOptionsViewModel}">
                 <view:EmptyNavOptionsView/>
             </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

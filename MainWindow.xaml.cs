@@ -28,6 +28,8 @@ namespace Scene_Maker
 
         private void windowBoarderMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (Mouse.LeftButton != MouseButtonState.Pressed)
+                return;
             this.DragMove();
         }
 
