@@ -1,5 +1,6 @@
 ﻿using NAudio.Extras;
 using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using Scene_Maker.Core;
 using Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls;
 using System;
@@ -42,22 +43,34 @@ namespace Scene_Maker.MVVM.ViewModel
                 SampleAggregator aggregator = new SampleAggregator(inputStream);
                 aggregator.NotificationCount = inputStream.WaveFormat.SampleRate / 100;
                 aggregator.PerformFFT = true;
-                aggregator.FftCalculated += (s, a) => FftCalculated?.Invoke(this, a);
+                aggregator.FftCalculated += (s, a) => OnFftCalculated(a);
                 aggregator.MaximumCalculated += (s, a) => OnMaxCalculated(a.MinSample, a.MaxSample);
                 playbackDevice.Init(aggregator);
 
                 AudioVisualizerView = new PolylineWaveFormControl();
+                AudioVisualizerView.Aggregator = aggregator;
+                AudioVisualizerView.inputStreamLength = inputStream.Length;
                 AudioVisualizer = AudioVisualizerView;
+                //audioVisualizerView.Width = 300;
 
                 Debug.WriteLine("Loaded " + fileName);
 
-                Play();
+                //Play();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Problem opening file");
                 CloseFile();
             }
+        }
+
+        public void OnFftCalculated(FftEventArgs args)
+        {
+            Debug.Write("OnFftCalculated: ");
+            if (args != null)
+                Debug.WriteLine(args.Result.Length);
+            else
+                Debug.WriteLine("NO RESULT");
         }
 
         public void OnMaxCalculated(float min, float max)

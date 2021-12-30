@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NAudio.Extras;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,8 +27,14 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
         double yScale = 40;
         int blankZone = 10;
 
-        readonly Polyline topLine = new Polyline();
-        readonly Polyline bottomLine = new Polyline();
+        SampleAggregator aggregator;
+        public long inputStreamLength;
+        bool loadedIn = false;
+
+        public SampleAggregator Aggregator { set { aggregator = value; } }
+
+        public readonly Polyline topLine = new Polyline();
+        public readonly Polyline bottomLine = new Polyline();
 
         public PolylineWaveFormControl()
         {
@@ -44,12 +52,23 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            Debug.WriteLine("OnSizeChanged From: " + e.PreviousSize + " to " + e.NewSize);
             // We will remove everything as we are going to rescale vertically
             renderPosition = 0;
             ClearAllPoints();
 
             yTranslate = ActualHeight / 2;
             yScale = ActualHeight / 2;
+
+            Debug.WriteLine("ActualHeight: " + ActualHeight + ", ActualWidht: " + ActualWidth);
+
+            if (!loadedIn)
+            {
+                float[] buffer = new float[inputStreamLength / 4];
+                int trimmedLength = Math.Max(0, (int)(inputStreamLength / 4));
+                aggregator.Read(buffer, 0, trimmedLength);
+                loadedIn = true;
+            }
         }
 
         private void ClearAllPoints()
@@ -64,18 +83,19 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             if (pixelWidth > 0)
             {
                 CreatePoint(maxValue, minValue);
+                Debug.WriteLine("Added Point (" + minValue + ", " + maxValue + ")");
 
                 if (renderPosition > ActualWidth)
                 {
                     renderPosition = 0;
                 }
-                int erasePosition = (renderPosition + blankZone) % pixelWidth;
-                if (erasePosition < topLine.Points.Count)
-                {
-                    double yPos = SampleToYPosition(0);
-                    topLine.Points[erasePosition] = new Point(erasePosition, yPos);
-                    bottomLine.Points[erasePosition] = new Point(erasePosition, yPos);
-                }
+                //int erasePosition = (renderPosition + blankZone) % pixelWidth;
+                //if (erasePosition < topLine.Points.Count)
+                //{
+                //    double yPos = SampleToYPosition(0);
+                //    topLine.Points[erasePosition] = new Point(erasePosition, yPos);
+                //    bottomLine.Points[erasePosition] = new Point(erasePosition, yPos);
+                //}
             }
         }
 
