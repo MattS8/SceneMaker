@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Scene_Maker.Core;
 
 namespace Scene_Maker.MVVM.ViewModel
@@ -20,7 +20,7 @@ namespace Scene_Maker.MVVM.ViewModel
 
         public AllRoutinesViewModel AllRoutinesVM { get; set; }
         public AllRoutinesOptionsViewModel AllRoutinesOptionsVM { get; set; }
-        public RoutineCreatorViewModel RoutineCreatoreVM { get; set; }
+        public RoutineCreatorViewModel RoutineCreatorVM { get; set; }
         public RoutineCreatorOptionsViewModel RoutineCreatorOptionsVM { get; set; }
         #endregion
 
@@ -66,7 +66,7 @@ namespace Scene_Maker.MVVM.ViewModel
         public MainViewModel()
         {
             AllRoutinesVM = new AllRoutinesViewModel();
-            RoutineCreatoreVM = new RoutineCreatorViewModel();
+            RoutineCreatorVM = new RoutineCreatorViewModel();
             AllRoutinesOptionsVM = new AllRoutinesOptionsViewModel(this);
             RoutineCreatorOptionsVM = new RoutineCreatorOptionsViewModel();
 
@@ -110,10 +110,10 @@ namespace Scene_Maker.MVVM.ViewModel
                 bool? result = openFileDialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    CurrentView = RoutineCreatoreVM;
+                    CurrentView = RoutineCreatorVM;
                     CurrentViewOptions = RoutineCreatorOptionsVM;
                     InnerNavView = BackToRoutinesVM;
-                    RoutineCreatoreVM.Load(openFileDialog.FileName);
+                    RoutineCreatorVM.Load(openFileDialog.FileName);
                 }
             });
             BackToRoutinesCommand = new RelayCommand(o =>

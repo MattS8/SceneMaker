@@ -2,23 +2,28 @@
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using Scene_Maker.Core;
+using Scene_Maker.MVVM.Model.Routine.Factory;
 using Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls;
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Scene_Maker.MVVM.ViewModel
 {
     class RoutineCreatorViewModel : ObservableObject
     {
-        private IWavePlayer playbackDevice;
         private object _audioVisualizerView;
         private PolylineWaveFormControl audioVisualizerView;
-        private WaveStream fileStream;
+        private RoutineCreator _routineCreator;
 
-        public event EventHandler<FftEventArgs> FftCalculated;
-        public event EventHandler<MaxSampleEventArgs> MaximumCalculated;
+        public RoutineCreatorViewModel()
+        {
+            _routineCreator = new RoutineCreator();
+            AudioVisualizerView = new PolylineWaveFormControl();
+            AudioVisualizer = AudioVisualizerView;
+        }
 
         public object AudioVisualizer
         {
@@ -28,55 +33,6 @@ namespace Scene_Maker.MVVM.ViewModel
                 _audioVisualizerView = value;
                 OnPropertyChanged();
             }
-        }
-
-        public void Load(string fileName)
-        {
-            Stop();
-            CloseFile();
-            EnsureDeviceCreated();
-
-            try
-            {
-                AudioFileReader inputStream = new AudioFileReader(fileName);
-                fileStream = inputStream;
-                SampleAggregator aggregator = new SampleAggregator(inputStream);
-                aggregator.NotificationCount = inputStream.WaveFormat.SampleRate / 100;
-                aggregator.PerformFFT = true;
-                aggregator.FftCalculated += (s, a) => OnFftCalculated(a);
-                aggregator.MaximumCalculated += (s, a) => OnMaxCalculated(a.MinSample, a.MaxSample);
-                playbackDevice.Init(aggregator);
-
-                AudioVisualizerView = new PolylineWaveFormControl();
-                AudioVisualizerView.Aggregator = aggregator;
-                AudioVisualizerView.inputStreamLength = inputStream.Length;
-                AudioVisualizer = AudioVisualizerView;
-                //audioVisualizerView.Width = 300;
-
-                Debug.WriteLine("Loaded " + fileName);
-
-                //Play();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Problem opening file");
-                CloseFile();
-            }
-        }
-
-        public void OnFftCalculated(FftEventArgs args)
-        {
-            Debug.Write("OnFftCalculated: ");
-            if (args != null)
-                Debug.WriteLine(args.Result.Length);
-            else
-                Debug.WriteLine("NO RESULT");
-        }
-
-        public void OnMaxCalculated(float min, float max)
-        {
-            Debug.WriteLine("Adding value: " + min + " " + max);
-            audioVisualizerView.AddValue(max, min);
         }
 
         public PolylineWaveFormControl AudioVisualizerView
@@ -93,45 +49,32 @@ namespace Scene_Maker.MVVM.ViewModel
             }
         }
 
-        public void Pause()
+        public void Load(string fileName)
         {
-            playbackDevice?.Pause();
+            //_routineCreator.FftCalculated += (s, a) => OnFftCalculated(a);
+            _routineCreator.MaximumCalculated += (s, a) => OnMaxCalculated(a.MinSample, a.MaxSample);
+            _routineCreator.LoadAudioFailure += (s, e) => OnLoadFailed(e);
+            _routineCreator.LoadAudioFile(fileName);
         }
 
-        public void Play()
+        private void OnLoadFailed(Exception exception)
         {
-            if (playbackDevice != null && fileStream != null && playbackDevice.PlaybackState != PlaybackState.Playing)
-            {
-                playbackDevice.Play();
-            }
+            MessageBox.Show(exception.Message, "Problem opening file");
         }
 
-        public void Stop()
+        public void OnFftCalculated(FftEventArgs args)
         {
-            playbackDevice?.Stop();
-            if (fileStream != null)
-            {
-                fileStream.Position = 0;
-            }
+            Debug.Write("OnFftCalculated: ");
+            if (args != null)
+                Debug.WriteLine(args.Result.Length);
+            else
+                Debug.WriteLine("NO RESULT");
         }
 
-        private void EnsureDeviceCreated()
+        public void OnMaxCalculated(float min, float max)
         {
-            if (playbackDevice == null)
-            {
-                CreateDevice();
-            }
-        }
-
-        private void CreateDevice()
-        {
-            playbackDevice = new WaveOut { DesiredLatency = 200 };
-        }
-
-        private void CloseFile()
-        {
-            fileStream?.Dispose();
-            fileStream = null;
+            //Debug.WriteLine("Adding value: " + min + " " + max);
+            audioVisualizerView.AddValue(max, min);
         }
     }
 }

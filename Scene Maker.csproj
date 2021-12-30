@@ -172,6 +172,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Model\Routine\Factory\RoutineCreator.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SceneCreation\SceneCreationOptionsViewModel.cs" />
