@@ -5,6 +5,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using System;
 using System.Windows.Input;
+using Scene_Maker.Core;
 
 namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
 {
@@ -13,6 +14,9 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
     /// </summary>
     public partial class PolylineWaveFormControl : UserControl, IWaveFormRender
     {
+        const float ZoomMax = 0.475f;
+        const float ScrollIntensity = 10000;
+
         int _renderPosition;
         double yMiddle = 40;
         double yScale = 40;
@@ -33,6 +37,7 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             topLinePoints = new List<float>();
 
             SizeChanged += OnSizeChanged;
+            MouseWheel += (s, a) => OnScrollZoom(s, a);
 
             InitializeComponent();
 
@@ -44,23 +49,24 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             mainCanvas.Children.Add(topLine);
             mainCanvas.Children.Add(bottomLine);
 
-            mainCanvas.MouseWheel += (s, a) => OnScrollZoom(s, a);
+            //mainCanvas.MouseWheel += (s, a) => OnScrollZoom(s, a);
         }
 
-        public void AddValue(float maxValue, float minValue)
+        #region Handlers
+        void OnScrollZoom(object sender, MouseWheelEventArgs args)
         {
-            topLinePoints.Add(maxValue);
-            bottomLinePoints.Add(minValue);
-        }
+            //Debug.WriteLine("Mouse Wheel Delta: " + args.Delta);
+            float deltaAdjusted = (float)args.Delta / ScrollIntensity;
 
-        public void Zoom(int delta)
-        {
-            Debug.WriteLine("Mouse Wheel Delta: " + delta);
-        }
+            _zoomFromStart = Extras.Clamp(_zoomFromStart + deltaAdjusted, 0, ZoomMax);
+            _zoomFromEnd = Extras.Clamp(_zoomFromEnd + deltaAdjusted, 0, ZoomMax);
 
-        void OnScrollZoom(object sender, MouseEventArgs args)
-        {
-            //Debug.WriteLine("delta: " + args., )
+            Tuple<int, int> offsets = GetZoomOffsets();
+            xScale = (offsets.Item2 - offsets.Item1) / ActualWidth;
+
+            Debug.WriteLine("Zoom: " + _zoomFromStart + ", " + _zoomFromEnd);
+
+            DrawWaveForm();
         }
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -79,38 +85,30 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             DrawWaveForm();
         }
 
+        public void AddValue(float maxValue, float minValue)
+        {
+            topLinePoints.Add(maxValue);
+            bottomLinePoints.Add(minValue);
+        }
+        #endregion
+
+        #region Audio Draw Functions
         private void DrawWaveForm()
         {
-            ClearAllPoints();;
+            _renderPosition = 0;
+            ClearAllPoints();
             Tuple<int, int> offsets = GetZoomOffsets();
             for (int i = 0; i < ActualWidth; ++i)
             {
-                int pos = offsets.Item1 + (int) Math.Round(i * xScale);
+                int iRounded = (int)Math.Round(i * xScale);
+                int pos = GetMaxPointPos((int) Math.Max(offsets.Item1 + iRounded - xScale, 0),  offsets.Item1 + iRounded);
+
+                //int pos = offsets.Item1 + (int) Math.Round(i * xScale);
                 if (pos > topLinePoints.Count-1)
                     pos = topLinePoints.Count-1;
                 CreatePoint(topLinePoints[pos], bottomLinePoints[pos]);
             }
         }
-
-        private Tuple<int, int> GetZoomOffsets()
-        {
-            int startOffset = (int)Math.Round(_zoomFromStart * topLinePoints.Count);
-            int endOffset = (int)Math.Round(topLinePoints.Count - (_zoomFromEnd * topLinePoints.Count));
-
-            return Tuple.Create(startOffset, endOffset);
-        }
-
-        private void ClearAllPoints()
-        {
-            topLine.Points.Clear();
-            bottomLine.Points.Clear();
-        }
-
-        private double SampleToYPosition(float value)
-        {
-            return yMiddle + value * yScale;
-        }
-
         private void CreatePoint(float topValue, float bottomValue)
         {
             double topLinePos = SampleToYPosition(topValue);
@@ -128,10 +126,53 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             _renderPosition++;
         }
 
-        public void Reset()
+        #region Helper Functions
+        private int GetMaxPointPos(int firstPos, int lastPos)
         {
-            _renderPosition = 0;
-            ClearAllPoints();
+            if (firstPos == lastPos)
+                return firstPos;
+
+
+            float maxValue = topLinePoints[firstPos];
+            int maxValuePosition = firstPos;
+
+            for (int i = 1; i <= lastPos - firstPos; ++i)
+            { 
+                if (topLinePoints[firstPos + i] > maxValue)
+                {
+                    maxValue = topLinePoints[firstPos + i];
+                    maxValuePosition = firstPos + i;
+                }
+            }
+            //Debug.WriteLine("Max Point between " + firstPos + " and " + lastPos + " is: " + maxValuePosition);
+
+            return maxValuePosition;
         }
+
+        private void ClearAllPoints()
+        {
+            topLine.Points.Clear();
+            bottomLine.Points.Clear();
+            _renderPosition = 0;
+        }
+
+        private double SampleToYPosition(float value)
+        {
+            return yMiddle + value * yScale;
+        }
+
+        #endregion
+        #endregion
+
+        #region Zoom Functions
+        private Tuple<int, int> GetZoomOffsets()
+        {
+            int startOffset = (int)Math.Round(_zoomFromStart * topLinePoints.Count);
+            int endOffset = (int)Math.Round(topLinePoints.Count - (_zoomFromEnd * topLinePoints.Count));
+
+            return Tuple.Create(startOffset, endOffset);
+        }
+        #endregion
+
     }
 }
