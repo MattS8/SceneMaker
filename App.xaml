@@ -1,4 +1,4 @@
-﻿<Application x:Class="Scene_Maker.App"
+<Application x:Class="Scene_Maker.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModel="clr-namespace:Scene_Maker.MVVM.ViewModel"
@@ -10,10 +10,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/SystemExitButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/SystemMenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/InnerBackButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonOneshotTheme.xaml"/>
+                <ResourceDictionary Source="Theme/SystemMenuTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:AllRoutinesViewModel}">
