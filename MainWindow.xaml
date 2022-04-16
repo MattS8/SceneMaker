@@ -18,7 +18,7 @@
 
     <Border Background="#272537"
             CornerRadius="10"
-            MouseDown="windowBoarderMouseDown"
+           
             >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -29,12 +29,13 @@
             <StackPanel Grid.Row="1">
                 <TextBlock Text="Scene Maker"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Margin="20,20,20,22"
+                   HorizontalAlignment="Stretch"
+                   Padding="20,20,20,22"
                    Foreground="White"
                    FontSize="22"
                    FontFamily="/Fonts/#Poppins"
-                   FontWeight="Medium"/>
+                   FontWeight="Medium"
+                   MouseDown="windowBoarderMouseDown"/>
                 <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
@@ -70,33 +71,41 @@
                 <ContentControl HorizontalAlignment="Left"
                                 Content="{Binding InnerNavView}"/>
 
-                <StackPanel 
+                <Border
+                    Grid.Row="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    MouseDown="windowBoarderMouseDown"
+                    Background="Transparent">
+                    <StackPanel 
                     Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top">
 
-                    <Button Grid.Column="1"
+                        <Button Grid.Column="1"
                         Grid.Row="0"
                         Style="{StaticResource SystemMenuButtonTheme}"
                         Content="-"
-                        Click="minimizeButtonClick"
+                        Click="minimizeButtonClick" HorizontalAlignment="Stretch"
                     />
 
-                    <Button Grid.Column="1"
+                        <Button Grid.Column="1"
                         Grid.Row="0"
                         Style="{StaticResource SystemMenuButtonTheme}"
                         Content="□"
                         Click="maximizeButtonClick"
                     />
 
-                    <Button Grid.Column="1"
+                        <Button Grid.Column="1"
                         Grid.Row="0"
                         Style="{StaticResource SystemExitButtonTheme}"
                         Content="x"
                         Click="closeButtonClick"
                     />
-                </StackPanel>
+                    </StackPanel>
+                </Border>
+                
 
                 <ContentControl Grid.Row="2"
                         Content="{Binding CurrentView}"/>

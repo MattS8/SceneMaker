@@ -66,9 +66,7 @@ namespace Scene_Maker.MVVM.ViewModel
         public MainViewModel()
         {
             AllRoutinesVM = new AllRoutinesViewModel();
-            RoutineCreatorVM = new RoutineCreatorViewModel();
             AllRoutinesOptionsVM = new AllRoutinesOptionsViewModel(this);
-            RoutineCreatorOptionsVM = new RoutineCreatorOptionsViewModel();
 
             SceneSettingsVM = new SceneSettingsViewModel();
             SceneSettingsOptionsVM = new SceneSettingsOptionsViewModel();
@@ -110,8 +108,9 @@ namespace Scene_Maker.MVVM.ViewModel
                 bool? result = openFileDialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
+                    RoutineCreatorVM = new RoutineCreatorViewModel();
                     CurrentView = RoutineCreatorVM;
-                    CurrentViewOptions = RoutineCreatorOptionsVM;
+                    CurrentViewOptions = new RoutineCreatorOptionsViewModel();
                     InnerNavView = BackToRoutinesVM;
                     RoutineCreatorVM.Load(openFileDialog.FileName);
                 }
