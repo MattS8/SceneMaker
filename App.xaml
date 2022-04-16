@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="Theme/SystemExitButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/SystemMenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/InnerBackButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/MenuButtonOneshotTheme.xaml"/>    
+                <ResourceDictionary Source="Theme/MenuButtonOneshotTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:AllRoutinesViewModel}">

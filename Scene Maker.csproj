@@ -96,9 +96,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\DragHandler.cs" />
     <Compile Include="Core\Extras.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Core\SeekBarHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -112,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\Routines\RoutineCreator\WaveFormControls\PolylineWaveFormControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\Routines\RoutineCreator\WaveFormControls\SeekController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\CustomScrollBarTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\InnerBackButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +186,7 @@
     <Compile Include="MVVM\Model\Routine\Factory\RoutineCreator.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\Routines\RoutineCreator\WaveFormData.cs" />
     <Compile Include="MVVM\ViewModel\SceneCreation\SceneCreationOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SceneCreation\SceneCreationViewModel.cs" />
     <Compile Include="MVVM\ViewModel\InnerNav\EmptyNavOptionsViewModel.cs" />
@@ -194,6 +205,9 @@
     <Compile Include="MVVM\View\Routines\RoutineCreator\WaveFormControls\IWaveFormRender.cs" />
     <Compile Include="MVVM\View\Routines\RoutineCreator\WaveFormControls\PolylineWaveFormControl.xaml.cs">
       <DependentUpon>PolylineWaveFormControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\Routines\RoutineCreator\WaveFormControls\SeekController.xaml.cs">
+      <DependentUpon>SeekController.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\SceneCreation\SceneCreationOptionsView.xaml.cs">
       <DependentUpon>SceneCreationOptionsView.xaml</DependentUpon>
@@ -252,6 +266,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Thumb_Icon_Default.png" />
+    <Resource Include="Assets\Thumb_Icon_MouseOver.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

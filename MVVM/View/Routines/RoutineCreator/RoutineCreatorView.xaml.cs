@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Scene_Maker.Core;
+using Scene_Maker.MVVM.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Scene_Maker.MVVM.View
 {
@@ -23,6 +14,30 @@ namespace Scene_Maker.MVVM.View
         public RoutineCreatorView()
         {
             InitializeComponent();
+        }
+
+        private void CreatorView_MouseMove(object sender, MouseEventArgs e)
+        {
+            var os = (FrameworkElement)e.OriginalSource;
+            var vm = os.DataContext as DragHandler;
+            if (vm != null)
+                vm.HandleMouseMovement(sender, e);
+        }
+
+        private void CreatorView_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var os = (FrameworkElement) e.OriginalSource;
+            var vm = os.DataContext as DragHandler;
+            if (vm != null)
+                vm.HandleMouseUp(sender, e);
+        }
+
+        private void CreatorView_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var os = (FrameworkElement)e.OriginalSource;
+            var vm = os.DataContext as DragHandler;
+            if (vm != null)
+                vm.HandleMouseEnter(sender, e);
         }
     }
 }

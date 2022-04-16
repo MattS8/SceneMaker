@@ -4,6 +4,7 @@ using NAudio.Wave.SampleProviders;
 using Scene_Maker.Core;
 using Scene_Maker.MVVM.Model.Routine.Factory;
 using Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls;
+using Scene_Maker.MVVM.ViewModel.Routines.RoutineCreator;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -12,41 +13,59 @@ using System.Windows.Input;
 
 namespace Scene_Maker.MVVM.ViewModel
 {
-    class RoutineCreatorViewModel : ObservableObject
+    class RoutineCreatorViewModel : ObservableObject, DragHandler, SeekBarHandler
     {
-        private object _audioVisualizerView;
-        private PolylineWaveFormControl audioVisualizerView;
+        // Model
         private RoutineCreator _routineCreator;
+
+        // Views
+        private PolylineWaveFormControl _audioVisualizerView;
+        private WaveFormData _waveFormData;
+        private SeekController _wavSeekController;
 
         public RoutineCreatorViewModel()
         {
+            _waveFormData = new WaveFormData();
             _routineCreator = new RoutineCreator();
             AudioVisualizerView = new PolylineWaveFormControl();
-            AudioVisualizer = AudioVisualizerView;
+            WavSeekController = new SeekController(); 
         }
 
-        public object AudioVisualizer
+        public SeekController WavSeekController
         {
-            get { return _audioVisualizerView; }
+            get => _wavSeekController;
             set
             {
-                _audioVisualizerView = value;
-                OnPropertyChanged();
+                if (value != _wavSeekController)
+                {
+                    _wavSeekController = value;
+                    _wavSeekController.SeekZoom(AudioVisualizerView.ZoomFromStart, AudioVisualizerView.ZoomFromEnd);
+                    _wavSeekController.ReportZoomChanged = OnSeekBarMoved;
+                    OnPropertyChanged();
+                }
             }
         }
 
         public PolylineWaveFormControl AudioVisualizerView
         {
-            get => audioVisualizerView;
+            get => _audioVisualizerView;
             set
             {
-                if (value != audioVisualizerView)
+                if (value != _audioVisualizerView)
                 {
                     Debug.WriteLine("Visualizer view set.");
-                    audioVisualizerView = value;
+                    _audioVisualizerView = value;
+                    _audioVisualizerView.WavZoom = WavZoomEventCaptured;
+                    
                     OnPropertyChanged();
                 }
             }
+        }
+
+        private void WavZoomEventCaptured(float fromStart, float fromEnd)
+        {
+            if (WavSeekController != null)
+                WavSeekController.SeekZoom(fromStart, fromEnd);
         }
 
         public void Load(string fileName)
@@ -74,7 +93,36 @@ namespace Scene_Maker.MVVM.ViewModel
         public void OnMaxCalculated(float min, float max)
         {
             //Debug.WriteLine("Adding value: " + min + " " + max);
-            audioVisualizerView.AddValue(max, min);
+            _audioVisualizerView.AddValue(max, min);
+        }
+
+        // -------- Drag Handler -------- //
+
+        public void HandleMouseMovement(object sender, MouseEventArgs e)
+        {
+            if (_wavSeekController != null)
+                _wavSeekController.HandleMouseMovement(sender, e);
+        }
+
+        public void HandleMouseDown(object sender, MouseEventArgs e) {}
+
+        public void HandleMouseUp(object sender, MouseEventArgs e)
+        {
+            if (_wavSeekController != null)
+                _wavSeekController.HandleMouseUp(sender, e);
+        }
+        public void HandleMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (_wavSeekController != null)
+                _wavSeekController.HandleMouseUp(sender, e);
+        }
+
+        public void HandleMouseEnter(object sender, MouseEventArgs e) {}
+
+        // -------- Seek Bar Handler -------- //
+        public void OnSeekBarMoved(float fromStart, float fromEnd)
+        {
+            AudioVisualizerView.HandleZoomChanged(fromStart, fromEnd);
         }
     }
 }
