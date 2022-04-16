@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Theme/InnerBackButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonOneshotTheme.xaml"/>
                 <ResourceDictionary Source="Theme/SystemMenuTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ThemeColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:AllRoutinesViewModel}">
