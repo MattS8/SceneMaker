@@ -26,7 +26,7 @@ namespace Scene_Maker
             SizeToContent = System.Windows.SizeToContent.Manual;
         }
 
-        private void windowBoarderMouseDown(object sender, MouseButtonEventArgs e)
+        private void windowBorderMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton != MouseButtonState.Pressed)
                 return;
