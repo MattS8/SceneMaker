@@ -104,7 +104,7 @@
                                 <MenuItem Header="New Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
                                     <MenuItem.Icon>
-                                        <Image Source="Assets/Images/btn_NewTheme.png"
+                                        <Image Source="Assets/btn_NewTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
                                     </MenuItem.Icon>
@@ -113,7 +113,7 @@
                                 <MenuItem Header="Open Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
                                     <MenuItem.Icon>
-                                        <Image Source="Assets/Images/btn_OpenTheme.png"
+                                        <Image Source="Assets/btn_OpenTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
                                     </MenuItem.Icon>
@@ -122,7 +122,7 @@
                                 <MenuItem Header="Close Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
                                     <MenuItem.Icon>
-                                        <Image Source="Assets/Images/btn_CloseTheme.png"
+                                        <Image Source="Assets/btn_CloseTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
                                     </MenuItem.Icon>
