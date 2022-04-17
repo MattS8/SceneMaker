@@ -1,4 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="SM_PanelBackground" Color="#272537"/>
     
+    <!-- // System Menu Colors // -->
+    <SolidColorBrush x:Key="SM_SystemMenuButtonText_Normal" Color="#7b7795"/>
+    <SolidColorBrush x:Key="SM_SystemMenuButtonText_MouseOver" Color="White"/>
+    <SolidColorBrush x:Key="SM_SystemSubmenuBG_Normal" Color="#22202f"/>
+    <SolidColorBrush x:Key="SM_SystemSubmenuBG_MouseOver" Color="#363348"/>
+    <SolidColorBrush x:Key="SM_SystemSubmenuPopUpShadow" Color="#FF0B0821"/>
+
+    <!-- // Menu Button Colors // -->
+    <SolidColorBrush x:Key="SM_ButtonBG_Normal" Color="#225E5487"/>
+    <SolidColorBrush x:Key="SM_ButtonBG_Selected" Color="#22202f"/>
+    <SolidColorBrush x:Key="SM_ButtonBG_MouseOver" Color="#363348"/>
+
 </ResourceDictionary>

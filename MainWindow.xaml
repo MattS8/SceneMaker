@@ -16,16 +16,15 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Background="#272537"
-            CornerRadius="10"
-           
-            >
+    <Border Background="{StaticResource SM_PanelBackground}"
+            CornerRadius="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <!-- // Side Panel // -->
             <StackPanel Grid.Row="1">
                 <TextBlock Text="Scene Maker"
                    VerticalAlignment="Center"
@@ -35,7 +34,14 @@
                    FontSize="22"
                    FontFamily="/Fonts/#Poppins"
                    FontWeight="Medium"
-                   MouseDown="windowBoarderMouseDown"/>
+                   MouseDown="windowBorderMouseDown"/>
+                <RadioButton Content="Scene Settings"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SceneSettingsCommand}"/>
+
                 <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
@@ -44,12 +50,7 @@
                              IsChecked="True"
                              Command="{Binding AllRoutinesCommand}"
                              />
-                <RadioButton Content="Scene Settings"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding SceneSettingsCommand}"/>
+
                 <RadioButton Content="Creation"
                              Height="50"
                              Foreground="White"
@@ -58,60 +59,115 @@
                              Command="{Binding SceneCreationCommand}"/>
             </StackPanel>
 
+            <!-- // Bottom Side Panel // -->
             <ContentControl Grid.Row="1"
                                 VerticalAlignment="Bottom"
                                 Content="{Binding CurrentViewOptions}"/>
 
+            <!-- // Right Content Window // -->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ContentControl HorizontalAlignment="Left"
-                                Content="{Binding InnerNavView}"/>
+                <!-- // Top System Bar // -->
+                <Grid Grid.Row="0"
+                            HorizontalAlignment="Stretch"
+                            >
+                    <TextBlock Background="Transparent" HorizontalAlignment="Stretch" MouseDown="windowBorderMouseDown"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Border
-                    Grid.Row="0"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Stretch"
-                    MouseDown="windowBoarderMouseDown"
-                    Background="Transparent">
-                    <StackPanel 
-                    Grid.Row="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
+                        <ContentControl Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        Content="{Binding InnerNavView}"/>
 
-                        <Button Grid.Column="1"
-                        Grid.Row="0"
-                        Style="{StaticResource SystemMenuButtonTheme}"
-                        Content="-"
-                        Click="minimizeButtonClick" HorizontalAlignment="Stretch"
-                    />
+                        <!-- // System Menu // -->
+                        <Menu Grid.Column="1"
+                            Background="Transparent">
 
-                        <Button Grid.Column="1"
-                        Grid.Row="0"
-                        Style="{StaticResource SystemMenuButtonTheme}"
-                        Content="□"
-                        Click="maximizeButtonClick"
-                    />
+                            <Menu.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </Menu.ItemsPanel>
 
-                        <Button Grid.Column="1"
+                            <!-- // Menu - File // -->
+                            <MenuItem Header="File"
+                                  Template="{StaticResource SystemMenuSubMenu_Template}">
+
+                                <MenuItem Header="New Scene" 
+                                          Template="{StaticResource SystemMenuItem_Template}">
+                                    <MenuItem.Icon>
+                                        <Image Source="Assets/Images/btn_NewTheme.png"
+                                               
+                                               Stretch="Uniform" Opacity="0.5" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="Open Scene" 
+                                          Template="{StaticResource SystemMenuItem_Template}">
+                                    <MenuItem.Icon>
+                                        <Image Source="Assets/Images/btn_OpenTheme.png"
+                                               
+                                               Stretch="Uniform" Opacity="0.5" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="Close Scene" 
+                                          Template="{StaticResource SystemMenuItem_Template}">
+                                    <MenuItem.Icon>
+                                        <Image Source="Assets/Images/btn_CloseTheme.png"
+                                               
+                                               Stretch="Uniform" Opacity="0.5" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                            </MenuItem>
+
+                        </Menu>
+
+
+                        <!-- // Window Buttons // -->
+                        <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top">
+
+                            <Button Grid.Column="1"
+                            Grid.Row="0"
+                            Style="{StaticResource SystemMenuButtonTheme}"
+                            Content="-"
+                            Click="minimizeButtonClick" HorizontalAlignment="Stretch"
+                        />
+
+                            <Button Grid.Column="1"
+                            Grid.Row="0"
+                            Style="{StaticResource SystemMenuButtonTheme}"
+                            Content="□"
+                            Click="maximizeButtonClick"
+                        />
+
+                            <Button Grid.Column="1"
                         Grid.Row="0"
                         Style="{StaticResource SystemExitButtonTheme}"
                         Content="x"
                         Click="closeButtonClick"
                     />
-                    </StackPanel>
-                </Border>
-                
+                        </StackPanel>
 
+                    </Grid>
+                </Grid>
+                
+                
                 <ContentControl Grid.Row="2"
                         Content="{Binding CurrentView}"/>
             </Grid>
-
-
 
         </Grid>
     </Border>

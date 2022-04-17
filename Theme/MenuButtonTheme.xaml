@@ -25,16 +25,16 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Background" Value="#225E5487"/>
+            <Setter Property="Background" Value="{DynamicResource SM_ButtonBG_Normal}"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#363348"/>
+                <Setter Property="Background" Value="{DynamicResource SM_ButtonBG_MouseOver}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202f"/>
+                <Setter Property="Background" Value="{DynamicResource SM_ButtonBG_Selected}"/>
             </Trigger>
 
 
