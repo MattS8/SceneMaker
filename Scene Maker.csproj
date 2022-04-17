@@ -261,8 +261,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Images\" />
+    <Resource Include="Assets\btn_CloseTheme.png" />
+    <Resource Include="Assets\btn_NewTheme.png" />
+    <Resource Include="Assets\btn_OpenTheme.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
