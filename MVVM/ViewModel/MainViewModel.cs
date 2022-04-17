@@ -74,8 +74,8 @@ namespace Scene_Maker.MVVM.ViewModel
             CreateSceneVM = new SceneCreationViewModel();
             CreateSceneOptionsVM = new SceneCreationOptionsViewModel();
 
-            CurrentView = AllRoutinesVM;
-            CurrentViewOptions = AllRoutinesOptionsVM;
+            CurrentView = SceneSettingsVM;
+            CurrentViewOptions = SceneSettingsOptionsVM;
 
             #region Top View Commands
             AllRoutinesCommand = new RelayCommand(o => 
