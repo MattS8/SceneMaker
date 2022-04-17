@@ -83,9 +83,15 @@ namespace Scene_Maker.MVVM.View.Routines.RoutineCreator.WaveFormControls
             Debug.WriteLine("Delta Width: " + deltaWidth + " New Left Margin: " + leftMargin + " New Right Margin: " + rightMargin);
 
             // Send update to notify other views of new seek view
-            double totalZoomMargin = _zoomFromStart + _zoomFromEnd;
-            double zoomFromStart = leftMargin / deltaWidth * totalZoomMargin;
-            double zoomFromEnd = rightMargin / deltaWidth * totalZoomMargin;
+            double zoomFromStart = 0;
+            double zoomFromEnd = 0;
+            if (deltaWidth > 0)
+            {
+                double totalZoomMargin = _zoomFromStart + _zoomFromEnd;
+                zoomFromStart = leftMargin / deltaWidth * totalZoomMargin;
+                zoomFromEnd = rightMargin / deltaWidth * totalZoomMargin;
+            }
+
             if (_ReportZoomChanged != null)
                 ReportZoomChanged((float)zoomFromStart, (float)zoomFromEnd);
             Debug.WriteLine("Zoom From Start: " + zoomFromStart + " Zoom From End: " + zoomFromEnd);
