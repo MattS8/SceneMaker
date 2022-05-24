@@ -30,18 +30,18 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Background" Value="#3A315C"/>
+            <Setter Property="Background" Value="{DynamicResource IN_ButtonBG_Normal}"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource IN_ButtonText_Normal}"/>
             <Setter Property="Width" Value="38"/>
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Foreground" Value="{DynamicResource IN_ButtonText_MouseOver}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#363348"/>
+                <Setter Property="Background" Value="{DynamicResource IN_ButtonBG_MouseOver}"/>
             </Trigger>
 
         </Style.Triggers>

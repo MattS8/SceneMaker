@@ -14,5 +14,11 @@
     <SolidColorBrush x:Key="SM_ButtonBG_Normal" Color="#225E5487"/>
     <SolidColorBrush x:Key="SM_ButtonBG_Selected" Color="#22202f"/>
     <SolidColorBrush x:Key="SM_ButtonBG_MouseOver" Color="#363348"/>
+    
+    <!-- // Inner Nav Button Colors // -->
+    <SolidColorBrush x:Key="IN_ButtonBG_Normal" Color="#3A315C"/>
+    <SolidColorBrush x:Key="IN_ButtonBG_MouseOver" Color="#FF69638C"/>
+    <SolidColorBrush x:Key="IN_ButtonText_Normal" Color="#FFB0ADC3"/>
+    <SolidColorBrush x:Key="IN_ButtonText_MouseOver" Color="White"/>
 
 </ResourceDictionary>

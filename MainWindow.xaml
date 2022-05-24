@@ -29,7 +29,7 @@
                 <TextBlock Text="Scene Maker"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Stretch"
-                   Padding="20,20,20,22"
+                   Padding="10,10,10,12"
                    Foreground="White"
                    FontSize="22"
                    FontFamily="/Fonts/#Poppins"
@@ -39,6 +39,7 @@
                              Height="50"
                              Foreground="White"
                              FontSize="14"
+                             IsChecked="True"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SceneSettingsCommand}"/>
 
@@ -47,7 +48,6 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
                              Command="{Binding AllRoutinesCommand}"
                              />
 
@@ -67,102 +67,109 @@
             <!-- // Right Content Window // -->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- // Top System Bar // -->
-                <Grid Grid.Row="0"
-                            HorizontalAlignment="Stretch"
-                            >
-                    <TextBlock Background="Transparent" HorizontalAlignment="Stretch" MouseDown="windowBorderMouseDown"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <Border Grid.Row="0"
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="8,0,0,8"
+                        Background="{DynamicResource SM_ButtonBG_Selected}">
+                    
+                    <Grid Grid.Row="0"
+                          HorizontalAlignment="Stretch">
+                        <TextBlock Background="Transparent" HorizontalAlignment="Stretch" MouseDown="windowBorderMouseDown"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <ContentControl Grid.Column="0"
+                            <ContentControl Grid.Column="0"
                                         HorizontalAlignment="Left"
                                         Content="{Binding InnerNavView}"/>
 
-                        <!-- // System Menu // -->
-                        <Menu Grid.Column="1"
-                            Background="Transparent">
+                            <!-- // System Menu // -->
+                            <Menu Grid.Column="1"
+                                  Background="Transparent">
 
-                            <Menu.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Vertical"/>
-                                </ItemsPanelTemplate>
-                            </Menu.ItemsPanel>
+                                <Menu.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </Menu.ItemsPanel>
 
-                            <!-- // Menu - File // -->
-                            <MenuItem Header="File"
-                                  Template="{StaticResource SystemMenuSubMenu_Template}">
+                                <!-- // Menu - File // -->
+                                <MenuItem Header="File"
+                                          Template="{StaticResource SystemMenuSubMenu_Template}"
+                                          Margin="0,0,0,4">
 
-                                <MenuItem Header="New Scene" 
+                                    <MenuItem Header="New Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
-                                    <MenuItem.Icon>
-                                        <Image Source="Assets/btn_NewTheme.png"
+                                        <MenuItem.Icon>
+                                            <Image Source="Assets/btn_NewTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
 
-                                <MenuItem Header="Open Scene" 
+                                    <MenuItem Header="Open Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
-                                    <MenuItem.Icon>
-                                        <Image Source="Assets/btn_OpenTheme.png"
+                                        <MenuItem.Icon>
+                                            <Image Source="Assets/btn_OpenTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
 
-                                <MenuItem Header="Close Scene" 
+                                    <MenuItem Header="Close Scene" 
                                           Template="{StaticResource SystemMenuItem_Template}">
-                                    <MenuItem.Icon>
-                                        <Image Source="Assets/btn_CloseTheme.png"
+                                        <MenuItem.Icon>
+                                            <Image Source="Assets/btn_CloseTheme.png"
                                                
                                                Stretch="Uniform" Opacity="0.5" />
-                                    </MenuItem.Icon>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+
                                 </MenuItem>
 
-                            </MenuItem>
-
-                        </Menu>
+                            </Menu>
 
 
-                        <!-- // Window Buttons // -->
-                        <StackPanel Grid.Column="2"
+                            <!-- // Window Buttons // -->
+                            <StackPanel Grid.Column="2"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top">
 
-                            <Button Grid.Column="1"
+                                <Button Grid.Column="1"
                             Grid.Row="0"
                             Style="{StaticResource SystemMenuButtonTheme}"
                             Content="-"
                             Click="minimizeButtonClick" HorizontalAlignment="Stretch"
                         />
 
-                            <Button Grid.Column="1"
+                                <Button Grid.Column="1"
                             Grid.Row="0"
                             Style="{StaticResource SystemMenuButtonTheme}"
                             Content="□"
                             Click="maximizeButtonClick"
                         />
 
-                            <Button Grid.Column="1"
+                                <Button Grid.Column="1"
                         Grid.Row="0"
                         Style="{StaticResource SystemExitButtonTheme}"
                         Content="x"
                         Click="closeButtonClick"
                     />
-                        </StackPanel>
+                            </StackPanel>
 
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Border>
+                
                 
                 
                 <ContentControl Grid.Row="2"

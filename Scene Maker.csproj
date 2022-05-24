@@ -169,6 +169,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\TextBoxTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\Routine\Factory\RoutineCreator.cs" />
+    <Compile Include="MVVM\Model\Routine\PinData.cs" />
+    <Compile Include="MVVM\Model\Routine\RoutineData.cs" />
+    <Compile Include="MVVM\Model\Scene\SceneData.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesOptionsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\Routines\AllRoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\Routines\RoutineCreator\WaveFormData.cs" />
@@ -265,5 +272,6 @@
     <Resource Include="Assets\btn_NewTheme.png" />
     <Resource Include="Assets\btn_OpenTheme.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

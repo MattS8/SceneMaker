@@ -127,12 +127,12 @@
                        IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                        Placement="Bottom"
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-                       VerticalOffset="8">
+                       VerticalOffset="0">
 
                     <Border x:Name="SubMenuBorder"
                             Background="{DynamicResource SM_SystemSubmenuBG_Normal}"
                             BorderBrush="{DynamicResource SM_SystemSubmenuBG_Normal}"
-                            CornerRadius="8"
+                            CornerRadius="0,0,8,8"
                             Margin="64">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity=".4" Color="#FF1D1D1D" Direction="270"/>
